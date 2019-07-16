@@ -7,7 +7,7 @@ def wordcount(filename):
     word_list = word_string.lower().split()
     word_dict = collections.defaultdict(dict)
     for word in word_list:
-         word_dict[word] = word_list.count(i)
+         word_dict[word] = word_list.count(word)
     filename.close()
     return word_dict
 
