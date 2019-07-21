@@ -30,14 +30,14 @@ def read_urls(filename):
 def download_images(img_urls, dest_dir):
     if not os.path.exists(dest_dir):
         os.makedirs(dest_dir)
-
+    #почему не mkdir?
     index = file(os.path.join(dest_dir, 'index.html'), 'w')
     index.write('<html><body>\n')
 
     i = 0
     for img_url in img_urls:
         local_name = 'img%d' % i
-        print 'Retrieving...', img_url
+        print('Retrieving...', img_url)
         urllib.urlretrieve(img_url, os.path.join(dest_dir, local_name))
 
         index.write('<img src="%s">' % (local_name,))
@@ -51,7 +51,7 @@ def main():
     args = sys.argv[1:]
 
     if not args:
-        print 'usage: [--todir dir] logfile '
+        print('usage: [--todir dir] logfile')
         sys.exit(1)
 
     todir = ''
@@ -64,7 +64,7 @@ def main():
     if todir:
         download_images(img_urls, todir)
     else:
-        print '\n'.join(img_urls)
+        print('\n'.join(img_urls))
 
 
 if __name__ == '__main__':
