@@ -47,70 +47,39 @@ print(my_func_dict(my_dict))
 
 #Написать собственную реализацию zip();
 
-my_list = []
-for elem in range(int(input())):
-    elem = list(map(int, input().split()))
-    my_list.append(elem)
-
-def my_func_zip(my_list):
+def my_func_zip(*args):
     len_of_row = []
-    for row in my_list:
+    for row in args:
         len_of_row.append(len(row))
         min_len_of_row = min(len_of_row)
-    result = ([row[i] for row in my_list] for i in range(min_len_of_row))
+    result = ([row[i] for row in args] for i in range(min_len_of_row))
     return result
-print(my_func_zip(my_list))
-
+print(my_func_zip([1, 2, 1, 2], [2, 4, 5, 6], [7, 8, 9]))
 
 #Написать собственную реализацию xrange().
 
-def my_range(stop, start=None, step=None):
+def my_range(stop, start = None, step = 1):
     result = []
-    if stop and start == None and step == None:
+    if start == None:
         c = 0
         while c < stop:
             result.append(c)
-            c += 1
-
-    elif (start or start == 0) and stop and step == None:
-        while start < stop:
-            result.append(start)
-            start += 1
-
-    elif (start or start == 0) and stop and step:
+            c += step
+    else:
         while start < stop:
             result.append(start)
             start += step
     my_generator_object = (elem for elem in result)
     return my_generator_object
-
-print(my_range(12, start=1, step=2))
-
+print(my_range(8, start = 2, step = 2))
 
 #Написать «вечный» генератор, который выдаёт всё время одно значение;
 
-# var 1
 def my_gen(n):
-    c = 0
-    while n > c:
+    while n or n == 0:
         yield n
-
-print(my_gen(5))
-f = my_gen(5)
+f = my_gen(23)
 print(next(f))
 print(next(f))
 print(next(f))
 
-# var 2
-from itertools import cycle
-
-def my_generator(n):
-    n = str(n)
-    for i in cycle(n):
-        yield i
-
-print(my_generator(5))
-f = my_generator(5)
-print(next(f))
-print(next(f))
-print(next(f))
